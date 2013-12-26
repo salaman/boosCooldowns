@@ -129,7 +129,9 @@ public class BoosCoolDownListener implements Listener {
 		int cooldownTime = 0;
 		on = BoosCoolDown.isPluginOnForPlayer(player);
 		try {
-			if (aliases.contains(originalCommand)) {
+			String commandPerm = "booscooldowns.aliases." + originalCommand.replaceAll(" ", "_");
+			if (aliases.contains(originalCommand)
+					&& (player.hasPermission("booscooldowns.aliases.*") || player.hasPermission(commandPerm))) {
 				originalCommand = BoosConfigManager.getAlias(originalCommand);
 				if (originalCommand.contains("$player")) {
 					originalCommand.replaceAll("$player", player.getName());
